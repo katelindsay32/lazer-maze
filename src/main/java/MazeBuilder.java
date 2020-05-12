@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class MazeBuilder {
 
     private FileReader fileReader;
+    public static String FILE_DELIMITER = "--";
 
     public MazeBuilder(FileReader fileReader) {
 
@@ -15,6 +16,7 @@ public class MazeBuilder {
 
     public Room[][] build(ArrayList<String> arguments) {
         Room[][] maze = createMaze(arguments);
+        
         return maze;
     }
 
@@ -31,6 +33,11 @@ public class MazeBuilder {
 
         if (x <= 0 || y <= 0) {
             throw new IllegalArgumentException("Dimensions should be greater than zero.");
+        }
+
+        String delimiter = arguments.get(1);
+        if (delimiter != FILE_DELIMITER) {
+            throw new IllegalArgumentException("Should be provided with two dimensions.");
         }
 
         return new Room[x][y];
